@@ -68,6 +68,8 @@ $(function(){
             // tell our views to initialize
             catListView.init();
             catView.init();
+            adminView.init();
+            adminFormView.init();
         }
     };
 
@@ -81,6 +83,7 @@ $(function(){
 
         catImgElem.click(function(e) {
           octopus.addClickTimes();
+          adminFormView.render();
         });
 
         this.render();
@@ -113,12 +116,59 @@ $(function(){
           $( "button" ).eq(i).click({ value: i},  function(elem) {
               var catCopy = octopus.getOneCat($( this ).index());
               octopus.setCurrentCat(catCopy);
+              adminFormView.render();
               catView.render();
           });
         });
       }
     };
 
+    var adminView = {
+      init: function(){
+        this.render();
+      },
+
+      render: function(){
+        $("#admin").click(function() {
+          console.log("525252525252525252");
+          if ( $(".admin-area").is( ":hidden" ) ) {
+            $(".admin-area").show( "slow" );
+          }
+        });
+      }
+    };
+
+    var adminFormView = {
+      init: function(){
+
+        $( ".admin-area" ).submit(function( event ) {
+          name = $("#admin-cat-name").val();
+          url = $("#admin-ImgUrl").val();
+          count = $("#admin-num-click").val();
+          cat = octopus.getCurrentCat();
+          cat.clickCount = count;
+          cat.imgAttribution = url;
+          cat.name = name;
+          octopus.setCurrentCat(cat);
+          catView.render();
+          event.preventDefault();
+        });
+
+        $( "#cancle" ).click(function() {
+          $(".admin-area").slideUp();
+        });
+
+        this.render();
+      },
+
+      render: function(){
+        cat = octopus.getCurrentCat();
+        $("#admin-cat-name").val(cat.name);
+        $("#admin-ImgUrl").val(cat.imgAttribution);
+        $("#admin-num-click").val(cat.clickCount);
+      }
+    };
+
     octopus.init();
-    
+
 });

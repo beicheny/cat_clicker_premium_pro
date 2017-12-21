@@ -11,10 +11,25 @@
     <div id="name-list"></div>
 
     <div class="pic-area">
-        <div id = "cat-name"></div>
+        <h5 id = "cat-name"></h5>
         <img id="cat-img" src="" alt="cute cat">
-        <div id = "click-times"></div>
+        <p>Times you click this cat</p>
+        <p id = "click-times"></p>
     </div>
+
+    <button id="admin">Admin</button>
+
+    <form class="admin-area" hidden>
+        Cat Name:<br>
+        <input type="text" id = "admin-cat-name" value=""><br>
+        Image Url:<br>
+        <input type="text" id = "admin-ImgUrl" value=""><br>
+        # of clicks:<br>
+        <input type="text" id = "admin-num-click" value=""><br>
+
+        <input id="save" type="submit" value="save">
+        <input id="cancle" type="button" value="cancle">
+    </form>
 
     <script src="js/libs/jquery-3.2.1.min.js"></script>
     <script src="js/script.js"></script>
